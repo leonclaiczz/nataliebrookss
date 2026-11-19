@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(100% 0 0);
+  --foreground: oklch(14.5% 0 0);
+  --card: oklch(100% 0 0);
+  --card-foreground: oklch(14.5% 0 0);
+  --muted: oklch(97% 0 0);
+  --muted-foreground: oklch(55.6% 0 0);
+  --border: oklch(92.2% 0 0);
+  --input: oklch(92.2% 0 0);
+  --ring: oklch(70.8% 0 0);
+}
+
+.dark {
+  --background: oklch(14.5% 0 0);
+  --foreground: oklch(98.5% 0 0);
+  --card: oklch(20.5% 0 0);
+  --card-foreground: oklch(98.5% 0 0);
+  --muted: oklch(26.9% 0 0);
+  --muted-foreground: oklch(70.8% 0 0);
+  --border: oklch(100% 0 0 / 0.1);
+  --input: oklch(100% 0 0 / 0.15);
+  --ring: oklch(55.6% 0 0);
+}
+
+@layer base {
+  * { border-color: var(--border); }
+  html { font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif; }
+  body { background-color: var(--background); color: var(--foreground); }
+}
+
+@layer components {
+  .typing-dot {
+    background: var(--muted-foreground);
+    border-radius: 9999px;
+    width: 6px;
+    height: 6px;
+    animation: nina-typing 1.2s ease-in-out infinite;
+    display: inline-block;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.15s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.3s; }
+  .online-pop { animation: nina-online-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  .accept-pop { animation: nina-accept-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  .sheet-in { animation: nina-sheet-in 0.3s ease-out both; }
+}
+
+@keyframes nina-typing {
+  0%, 60%, to { opacity: 0.45; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+@keyframes nina-online-pop {
+  0% { opacity: 0; transform: scale(0); }
+  70% { opacity: 1; transform: scale(1.3); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes nina-accept-pop {
+  0% { opacity: 0; transform: scale(0.6); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes nina-sheet-in {
+  0% { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
